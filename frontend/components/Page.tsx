@@ -1,14 +1,14 @@
-import Header from "./Header"
+import Header from './Header';
 
-interface Props{
-  children: any
+interface Props {
+  children: any;
 }
 export default function Page({ children }: Props) {
   return (
     <div>
-      <Header></Header>
+      <Header />
       <h1>Hi! This is the nav component</h1>
-      { children }
+      {children}
     </div>
   );
 }
