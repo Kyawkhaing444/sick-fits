@@ -31,7 +31,6 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en-my">
         <Head>
-          <title>My page</title>
           {this.props.styles}
         </Head>
         <body>
