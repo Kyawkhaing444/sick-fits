@@ -4,6 +4,8 @@ import {
   statelessSessions,
 } from '@keystone-next/keystone/session';
 import { createAuth } from '@keystone-next/auth';
+import { ProductImage } from './schemas/ProductImage';
+import { Product } from './schemas/Product';
 import { User } from './schemas/User';
 import 'dotenv/config';
 
@@ -39,12 +41,13 @@ export default withAuth(
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     lists: createSchema({
       User,
+      Product,
+      ProductImage,
     }),
     ui: {
-      isAccessAllowed: ({ session }) => {
-        console.log(session);
-        return !!session?.data;
-      },
+      isAccessAllowed: ({ session }) =>
+        // console.log(session);
+        !!session?.data,
     },
     session: withItemData(statelessSessions(sessionConfig), {
       // graphQL query
