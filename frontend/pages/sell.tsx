@@ -4,6 +4,7 @@ import { ChangeEvent } from 'react';
 import DisplayError from '../components/ErrorMessage';
 import Form from '../components/styles/Form';
 import useForm from '../lib/useForm';
+import { AllProductQuery } from '../components/Products';
 
 const createProductMutation = gql`
   mutation Create_Product_Mutation($name: String!, $description: String!, $price: Int!, $image: Upload) {
@@ -33,6 +34,11 @@ export default function SellPage() {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const [createProduct, { loading, error, data }] = useMutation(createProductMutation, {
     variables: inputs,
+    refetchQueries: [
+      {
+        query: AllProductQuery,
+      },
+    ],
   });
   const submitHandler = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();

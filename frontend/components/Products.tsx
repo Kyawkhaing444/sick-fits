@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { AllProductType } from '../Type/ProductType';
 import Product from './Product';
 
-const allProductQuery = gql`
+export const AllProductQuery = gql`
   query ALL_Product_Query {
     allProducts {
       id
@@ -30,7 +30,7 @@ const ProductsContainer = styled.div`
 `;
 
 export default function Products() {
-  const { data, error, loading }: QueryResult<AllProductType> = useQuery(allProductQuery);
+  const { data, error, loading }: QueryResult<AllProductType> = useQuery(AllProductQuery);
   if (loading) return <p>loading ..... </p>;
   if (error) {
     console.log(error);
