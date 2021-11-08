@@ -1,28 +1,15 @@
 import { useMutation } from '@apollo/client';
-import gql from 'graphql-tag';
 import { ChangeEvent } from 'react';
+import Router from 'next/router';
 import DisplayError from '../components/ErrorMessage';
 import Form from '../components/styles/Form';
 import useForm from '../lib/useForm';
-import { AllProductQuery } from '../components/Products';
+import { AllProductQuery } from '../GraphQL/query/allProducts';
+import { createProductMutation } from '../GraphQL/mutation/createProduct';
 
-const createProductMutation = gql`
-  mutation Create_Product_Mutation($name: String!, $description: String!, $price: Int!, $image: Upload) {
-    createProduct(
-      data: {
-        name: $name
-        description: $description
-        price: $price
-        photo: { create: { image: $image, altText: $name } }
-      }
-    ) {
-      id
-      name
-      description
-      price
-    }
-  }
-`;
+interface CreateProductReturnedType {
+  id: string;
+}
 
 export default function SellPage() {
   const { inputs, onChangeHandler, clearForm } = useForm({
@@ -32,18 +19,28 @@ export default function SellPage() {
     description: '',
   });
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const [createProduct, { loading, error, data }] = useMutation(createProductMutation, {
-    variables: inputs,
-    refetchQueries: [
-      {
-        query: AllProductQuery,
-      },
-    ],
-  });
+  const [createProduct, { loading, error }] = useMutation<{ createProduct: CreateProductReturnedType }>(
+    createProductMutation,
+    {
+      variables: inputs,
+      refetchQueries: [
+        {
+          query: AllProductQuery,
+        },
+      ],
+    }
+  );
   const submitHandler = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await createProduct();
+    const res = await createProduct();
     clearForm();
+    let id = '';
+    if (res.data) {
+      id = res.data.createProduct.id;
+    }
+    Router.push({
+      pathname: `/product/${id}`,
+    });
   };
   return (
     <Form onSubmit={submitHandler}>

@@ -13,8 +13,8 @@ export default function Product({ product }: PropType) {
     <ItemStyle>
       <img src={product?.photo?.image?.publicUrlTransformed} alt={product.name} />
       <Title>
-        <Link href="">
-          <a href={`/product/${product.id}`}> {product.name}</a>
+        <Link href={`/product/${product.id}`}>
+          <a> {product.name}</a>
         </Link>
       </Title>
       <p>{product.description}</p>

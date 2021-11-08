@@ -1,5 +1,5 @@
 export interface PhotoType {
-  id: string;
+  id?: string;
   image: {
     publicUrlTransformed: string;
   };
