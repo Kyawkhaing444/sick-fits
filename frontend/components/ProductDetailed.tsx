@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { ProductQuery } from '../GraphQL/query/product';
 import { ProductType } from '../Type/ProductType';
 import DisplayError from './ErrorMessage';
-import Title from './styles/Title';
 
 interface PropType {
   id: string;
