@@ -4,6 +4,7 @@ import ItemStyle from './styles/ItemStyles';
 import PriceTag from './styles/PriceTag';
 import Title from './styles/Title';
 import { formatMoney } from '../lib/formatMoney';
+import DeleteButton from './DeleteButton';
 
 interface PropType {
   product: ProductType;
@@ -30,6 +31,7 @@ export default function Product({ product }: PropType) {
         >
           Edit
         </Link>
+        <DeleteButton id={product.id}>Delete</DeleteButton>
       </div>
     </ItemStyle>
   );
