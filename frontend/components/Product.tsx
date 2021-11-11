@@ -14,9 +14,7 @@ export default function Product({ product }: PropType) {
     <ItemStyle>
       <img src={product?.photo?.image?.publicUrlTransformed} alt={product.name} />
       <Title>
-        <Link href={`/product/${product.id}`}>
-          <a> {product.name}</a>
-        </Link>
+        <Link href={`/product/${product.id}`}>{product.name}</Link>
       </Title>
       <PriceTag>{formatMoney(product.price)}</PriceTag>
       <p>{product.description}</p>
