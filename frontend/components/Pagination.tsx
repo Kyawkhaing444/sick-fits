@@ -29,14 +29,14 @@ export default function Pagination({ page }: PropType) {
           Sick Fits | Page {page} of {pageCount}
         </title>
       </head>
-      <Link href="/">
+      <Link href={`/products/${page - 1}`}>
         <a aria-disabled={page <= 1}> ← Prev</a>
       </Link>
       <p>
         Page {page} of {pageCount}
       </p>
       <p>{count} Items Total</p>
-      <Link href="/">
+      <Link href={`/products/${page + 1}`}>
         <a aria-disabled={page >= pageCount}>Next →</a>
       </Link>
     </PaginationStyles>
