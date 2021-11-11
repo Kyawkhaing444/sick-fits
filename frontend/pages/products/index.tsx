@@ -11,7 +11,7 @@ export default function ProductPage() {
   return (
     <>
       <Pagination page={page} />
-      <Products />
+      <Products page={page} />
       <Pagination page={page} />
     </>
   );

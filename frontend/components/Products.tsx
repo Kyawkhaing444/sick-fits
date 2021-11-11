@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
 import { QueryResult, useQuery } from '@apollo/client';
 import styled from 'styled-components';
-import { AllProductQuery } from '../GraphQL/query/allProducts';
+import { perPage } from '../config';
+import { ProductsWithPaginationQuery } from '../GraphQL/query/productWithPagination';
 import { AllProductType } from '../Type/ProductType';
 import Product from './Product';
 
@@ -11,8 +12,17 @@ const ProductsContainer = styled.div`
   grid-gap: 60px;
 `;
 
-export default function Products() {
-  const { data, error, loading }: QueryResult<AllProductType> = useQuery(AllProductQuery);
+interface PropType {
+  page: number;
+}
+
+export default function Products({ page }: PropType) {
+  const { data, error, loading }: QueryResult<AllProductType> = useQuery(ProductsWithPaginationQuery, {
+    variables: {
+      skip: page * perPage - perPage,
+      first: perPage,
+    },
+  });
   if (loading) return <p>loading ..... </p>;
   if (error) {
     console.log(error);
