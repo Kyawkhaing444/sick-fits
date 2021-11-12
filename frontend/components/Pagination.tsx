@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client';
+import Head from 'next/head';
 import Link from 'next/link';
 import { perPage } from '../config';
 import { ProductCount } from '../GraphQL/query/productCount';
@@ -24,11 +25,11 @@ export default function Pagination({ page }: PropType) {
   }
   return (
     <PaginationStyles>
-      <head>
+      <Head>
         <title>
           Sick Fits | Page {page} of {pageCount}
         </title>
-      </head>
+      </Head>
       <Link href={`/products/${page - 1}`}>
         <a aria-disabled={page <= 1}> ← Prev</a>
       </Link>

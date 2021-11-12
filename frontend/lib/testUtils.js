@@ -105,12 +105,4 @@ function makePaginationMocksFor(length) {
   ];
 }
 
-export {
-  makePaginationMocksFor,
-  LocalStorageMock,
-  fakeItem,
-  fakeUser,
-  fakeCartItem,
-  fakeOrder,
-  fakeOrderItem,
-};
+export { makePaginationMocksFor, LocalStorageMock, fakeItem, fakeUser, fakeCartItem, fakeOrder, fakeOrderItem };
