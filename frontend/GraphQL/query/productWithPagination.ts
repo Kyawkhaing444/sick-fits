@@ -17,3 +17,8 @@ export const ProductsWithPaginationQuery = gql`
     }
   }
 `;
+
+export interface ProductsWithPaginationPara {
+  skip: number;
+  first: number;
+}

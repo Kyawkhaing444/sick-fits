@@ -10,7 +10,7 @@ interface PropType {
   page: number;
 }
 
-interface ProductCountReturnedType {
+export interface ProductCountReturnedType {
   count: number;
 }
 
@@ -21,7 +21,7 @@ export default function Pagination({ page }: PropType) {
   let count = 0;
   if (data) {
     count = data._allProductsMeta.count;
-    pageCount = count / perPage;
+    pageCount = Math.ceil(count / perPage);
   }
   return (
     <PaginationStyles>

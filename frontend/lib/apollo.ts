@@ -15,6 +15,7 @@ import isEqual from 'lodash/isEqual';
 import type { AppProps } from 'next/app';
 import { useMemo } from 'react';
 import { endpoint, prodEndpoint } from '../config';
+import { paginationField } from './pagination';
 
 const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__';
 
@@ -59,7 +60,9 @@ const createApolloClient = (headers: IncomingHttpHeaders | null = null) => {
       },
       typePolicies: {
         Query: {
-          fields: {},
+          fields: {
+            allProducts: paginationField(),
+          },
         },
       },
     }),
