@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import styled from 'styled-components';
-import React from 'react';
 
 import PropTypes from 'prop-types';
+import { ApolloError } from '@apollo/client';
 
 const ErrorStyles = styled.div`
   padding: 2rem;
@@ -18,17 +20,39 @@ const ErrorStyles = styled.div`
   }
 `;
 
-const DisplayError = ({ error }) => {
-  if (!error || !error.message) return null;
-  if (error.networkError && error.networkError.result && error.networkError.result.errors.length) {
-    return error.networkError.result.errors.map((error, i) => (
-      <ErrorStyles key={i}>
-        <p data-test="graphql-error">
-          <strong>Shoot!</strong>
-          {error.message.replace('GraphQL error: ', '')}
-        </p>
-      </ErrorStyles>
-    ));
+interface MutationError {
+  __typename: string;
+  item?: {
+    id: string;
+    email: string;
+  };
+  message?: string;
+}
+
+interface PropType {
+  error?: ApolloError | MutationError;
+}
+
+const DisplayError = ({ error }: PropType) => {
+  if (!error || !error.message) return <></>;
+  if (
+    error instanceof ApolloError &&
+    error.networkError &&
+    'result' in error.networkError &&
+    error.networkError.result?.errors?.length
+  ) {
+    return (
+      <>
+        {error.networkError.result.errors.map((errorSecond: Error, i: string) => (
+          <ErrorStyles key={i}>
+            <p data-test="graphql-error">
+              <strong>Shoot!</strong>
+              {errorSecond.message.replace('GraphQL error: ', '')}
+            </p>
+          </ErrorStyles>
+        ))}
+      </>
+    );
   }
   return (
     <ErrorStyles>
