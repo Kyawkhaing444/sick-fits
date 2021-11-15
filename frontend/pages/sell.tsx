@@ -10,14 +10,22 @@ import { createProductMutation } from '../GraphQL/mutation/createProduct';
 interface CreateProductReturnedType {
   id: string;
 }
+interface FormInputType {
+  name: string;
+  price: number;
+  image?: File;
+  description: string;
+}
+
+const initialValues: FormInputType = {
+  name: 'KyawKhaing',
+  price: 12345,
+  image: undefined,
+  description: '',
+};
 
 export default function SellPage() {
-  const { inputs, onChangeHandler, clearForm } = useForm({
-    name: 'KyawKhaing',
-    price: 12345,
-    image: undefined,
-    description: '',
-  });
+  const { inputs, onChangeHandler, clearForm } = useForm<FormInputType>(initialValues);
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const [createProduct, { loading, error }] = useMutation<{ createProduct: CreateProductReturnedType }>(
     createProductMutation,

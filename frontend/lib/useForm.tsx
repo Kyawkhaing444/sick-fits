@@ -1,13 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 
-interface FormInputType {
-  name?: string;
-  price?: number;
-  image?: File;
-  description?: string;
-}
-
-export default function useForm(initialState: FormInputType) {
+export default function useForm<StateType>(initialState: StateType) {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const [inputs, setInputs] = useState(initialState);
 
@@ -50,7 +43,9 @@ export default function useForm(initialState: FormInputType) {
   };
 
   const clearForm = () => {
-    const blinkState: FormInputType = Object.fromEntries(Object.entries(inputs).map(([key]) => [key, '']));
+    const blinkState: StateType = Object.fromEntries(
+      Object.entries(inputs).map(([key]) => [key, ''])
+    ) as unknown as StateType;
     setInputs(blinkState);
   };
 
