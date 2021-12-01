@@ -4,6 +4,7 @@ import {
   statelessSessions,
 } from '@keystone-next/keystone/session';
 import { createAuth } from '@keystone-next/auth';
+import { sendPasswordResetEmail } from './lib/mail';
 import { ProductImage } from './schemas/ProductImage';
 import { Product } from './schemas/Product';
 import { User } from './schemas/User';
@@ -26,8 +27,11 @@ const { withAuth } = createAuth({
     // TODO : adding role
   },
   passwordResetLink: {
-    sendToken: (args) => {
-      console.log(args);
+    sendToken: async (args) => {
+      await sendPasswordResetEmail({
+        resetToken: args.token,
+        to: args.identity,
+      });
     },
     tokensValidForMins: 60,
   },
