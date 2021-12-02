@@ -4,6 +4,7 @@ import {
   statelessSessions,
 } from '@keystone-next/keystone/session';
 import { createAuth } from '@keystone-next/auth';
+import { CartItem } from './schemas/CartItem';
 import { sendPasswordResetEmail } from './lib/mail';
 import { ProductImage } from './schemas/ProductImage';
 import { Product } from './schemas/Product';
@@ -59,6 +60,7 @@ export default withAuth(
       User,
       Product,
       ProductImage,
+      CartItem,
     }),
     ui: {
       isAccessAllowed: ({ session }) =>
