@@ -4,6 +4,7 @@ import {
   statelessSessions,
 } from '@keystone-next/keystone/session';
 import { createAuth } from '@keystone-next/auth';
+import { extendGraphqlSchema } from './mutations/index';
 import { CartItem } from './schemas/CartItem';
 import { sendPasswordResetEmail } from './lib/mail';
 import { ProductImage } from './schemas/ProductImage';
@@ -62,6 +63,7 @@ export default withAuth(
       ProductImage,
       CartItem,
     }),
+    extendGraphqlSchema,
     ui: {
       isAccessAllowed: ({ session }) =>
         // console.log(session);
