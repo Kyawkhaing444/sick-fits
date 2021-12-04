@@ -7,6 +7,7 @@ import Page from '../components/Page';
 import { useApollo } from '../lib';
 
 import '../components/styles/nprogress.css';
+import { ContextProvider } from '../context';
 
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeStart', () => NProgress.done());
@@ -15,9 +16,11 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   const apolloClient = useApollo(pageProps);
   return (
     <ApolloProvider client={apolloClient}>
-      <Page>
-        <Component {...pageProps} />
-      </Page>
+      <ContextProvider>
+        <Page>
+          <Component {...pageProps} />
+        </Page>
+      </ContextProvider>
     </ApolloProvider>
   );
 }
