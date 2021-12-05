@@ -4,6 +4,7 @@ import calTotalPrice from '../lib/calTotalPrice';
 import { formatMoney } from '../lib/formatMoney';
 import useCurrentUser from '../lib/useCurrentUser';
 import { CartType } from '../Type/CartType';
+import { RemoveCart } from './RemoveCart';
 import CartStyles from './styles/CartStyles';
 import CloseButton from './styles/CloseButton';
 import Supreme from './styles/Supreme';
@@ -36,6 +37,7 @@ function CartItem({ cartItem }: { cartItem: CartType }) {
           </em>
         </p>
       </div>
+      <RemoveCart id={cartItem.id} />
     </CartItemStyle>
   );
 }
