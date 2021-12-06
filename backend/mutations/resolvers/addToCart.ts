@@ -9,6 +9,7 @@ interface ExistingCartType {
 
 async function addToCart(
   // eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   root: any,
   { productId }: { productId: string },
   context: KeystoneContext
