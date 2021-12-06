@@ -4,6 +4,8 @@ import {
   statelessSessions,
 } from '@keystone-next/keystone/session';
 import { createAuth } from '@keystone-next/auth';
+import { Order } from './schemas/Order';
+import { OrderItem } from './schemas/OrderItem';
 import { extendGraphqlSchema } from './mutations/index';
 import { CartItem } from './schemas/CartItem';
 import { sendPasswordResetEmail } from './lib/mail';
@@ -62,6 +64,8 @@ export default withAuth(
       Product,
       ProductImage,
       CartItem,
+      Order,
+      OrderItem,
     }),
     extendGraphqlSchema,
     ui: {
