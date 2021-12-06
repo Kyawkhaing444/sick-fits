@@ -4,6 +4,7 @@ import calTotalPrice from '../lib/calTotalPrice';
 import { formatMoney } from '../lib/formatMoney';
 import useCurrentUser from '../lib/useCurrentUser';
 import { CartType } from '../Type/CartType';
+import { CheckOut } from './CheckOut';
 import { RemoveCart } from './RemoveCart';
 import CartStyles from './styles/CartStyles';
 import CloseButton from './styles/CloseButton';
@@ -56,7 +57,10 @@ export default function Cart() {
           <CartItem key={cartItem.product.id} cartItem={cartItem} />
         ))}
       </ul>
-      <footer>{currentUser && <p>{formatMoney(calTotalPrice({ cart: currentUser.cart }))}</p>}</footer>
+      <footer>
+        {currentUser && <p>{formatMoney(calTotalPrice({ cart: currentUser.cart }))}</p>}
+        <CheckOut />
+      </footer>
     </CartStyles>
   );
 }
