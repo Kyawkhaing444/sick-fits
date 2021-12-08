@@ -15,5 +15,8 @@ export interface OrderType {
   id: string;
   total: number;
   charge: string;
+  user: {
+    id: string;
+  };
   items: OrderItemType[];
 }
