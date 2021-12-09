@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/unbound-method */
 import { integer, select, text, relationship } from '@keystone-next/fields';
 import { list } from '@keystone-next/keystone/schema';
+import { ListAccessArgs } from '../types';
 import { rule, isSignedIn } from '../access';
 
 export const Product = list({
@@ -38,5 +39,11 @@ export const Product = list({
       },
     }),
     price: integer(),
+    user: relationship({
+      ref: 'User.products',
+      defaultValue: ({ context }) => ({
+        connect: { id: (context.session as ListAccessArgs).itemId },
+      }),
+    }),
   },
 });
