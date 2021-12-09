@@ -1,7 +1,15 @@
+/* eslint-disable @typescript-eslint/unbound-method */
 import { integer, select, text, relationship } from '@keystone-next/fields';
 import { list } from '@keystone-next/keystone/schema';
+import { rule, isSignedIn } from '../access';
 
 export const Product = list({
+  access: {
+    create: isSignedIn,
+    read: isSignedIn,
+    update: rule.canManageProducts,
+    delete: rule.canManageProducts,
+  },
   fields: {
     name: text({ isRequired: true }),
     description: text({
