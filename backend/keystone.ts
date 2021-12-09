@@ -4,6 +4,7 @@ import {
   statelessSessions,
 } from '@keystone-next/keystone/session';
 import { createAuth } from '@keystone-next/auth';
+import { Role } from './schemas/Role';
 import { Order } from './schemas/Order';
 import { OrderItem } from './schemas/OrderItem';
 import { extendGraphqlSchema } from './mutations/index';
@@ -66,6 +67,7 @@ export default withAuth(
       CartItem,
       Order,
       OrderItem,
+      Role,
     }),
     extendGraphqlSchema,
     ui: {
