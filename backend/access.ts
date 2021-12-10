@@ -34,6 +34,30 @@ export const rule = {
     // do they own this product?
     return { user: { id: session.itemId } };
   },
+  canOrder({ session }: ListAccessArgs) {
+    // is sign in?
+    if (!isSignedIn({ session })) {
+      return false;
+    }
+    // have the permission
+    if (permissions.canManageProducts({ session })) {
+      return true;
+    }
+    // do they own this product?
+    return { user: { id: session.itemId } };
+  },
+  canManageOrderItem({ session }: ListAccessArgs) {
+    // is sign in?
+    if (!isSignedIn({ session })) {
+      return false;
+    }
+    // have the permission
+    if (permissions.canManageProducts({ session })) {
+      return true;
+    }
+    // do they own this product?
+    return { order: { user: { id: session.itemId } } };
+  },
   canReadProducts({ session }: ListAccessArgs) {
     // have the permission
     if (permissions.canManageProducts({ session })) {
