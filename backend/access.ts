@@ -66,4 +66,15 @@ export const rule = {
     // can only see products with the avaliable flags
     return { status: 'AVALIABLE' };
   },
+  canManageUsers({ session }: ListAccessArgs) {
+    // is sign in?
+    if (!isSignedIn({ session })) {
+      return false;
+    }
+    // have the permission
+    if (permissions.canManageUsers({ session })) {
+      return true;
+    }
+    return { id: session.itemId };
+  },
 };
