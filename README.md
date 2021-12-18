@@ -2,10 +2,6 @@
 <br />
 <p align="center">
   <h3 align="center">Sick Fits (Next.js E-commerce)</h3>
-
-  <p align="center">
-    <a href="">View Demo</a>
-  </p>
 </p>
 
 <!-- ABOUT THE PROJECT -->
